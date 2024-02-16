@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS USER_NOTNULL(
         email VARCHAR(255)
 )ENGINE=INNODB;
 
+drop table user_notnull;
+
 INSERT INTO user_notnull (user_no, user_id, user_pwd, user_name, gender, phone, email)
 values (1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678', 'hong123@gmail.com'),
 	   (2, 'user02', 'pass02', '유관순', '여', '010-1235-5679', 'yu77@gmail.com');
@@ -43,6 +45,8 @@ CREATE TABLE IF NOT EXISTS USER_UNIQUE(
         email VARCHAR(255),
         UNIQUE(phone)
 )ENGINE=INNODB;
+
+drop table user_unique;
 
 INSERT INTO USER_UNIQUE (user_no, user_id, user_pwd, user_name, gender, phone, email)
 values (1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678', 'hong123@gmail.com'),
@@ -73,6 +77,8 @@ CREATE TABLE IF NOT EXISTS USER_PRIMARYKEY(
         PRIMARY KEY(user_no)
 )ENGINE=INNODB;
 
+drop table user_primarykey;
+
 INSERT INTO USER_PRIMARYKEY (user_no, user_id, user_pwd, user_name, gender, phone, email)
 values (1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678', 'hong123@gmail.com'),
 	   (2, 'user02', 'pass02', '유관순', '여', '010-1235-5679', 'yu77@gmail.com');
@@ -97,13 +103,15 @@ values (2, 'user03', 'pass03' , '이순신', '남', '010-1235-5679', 'lee@gmail.
 -- 제약조건 확인용 테이블 생성 및 INSERT 후 조회하기(부모 테이블)
 DROP TABLE IF EXISTS user_grade;
 CREATE TABLE IF NOT EXISTS user_grade (
-		grade_code int,
+		grade_code int not null,
         grade_name varchar(255) not null
 )ENGINE=INNODB;  
 
 insert into user_grade values (10, '일반회원'),
 							(20, '우수회원'),
                             (30, '특별회원');
+                            
+drop table user_grade;
 
 select * from user_grade;
 
@@ -122,9 +130,12 @@ CREATE TABLE IF NOT EXISTS USER_FORIEGNKEY1(
         references user_grade (grade_code)
 )ENGINE=INNODB;
 
+drop table user_foriegnkey1;
+
 insert into USER_FORIEGNKEY1 (user_no, user_id, user_pwd, user_name, gender, phone, email, grade_code)
 values (1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678', 'hong123@gmail.com', 10),
 	   (2, 'user02', 'pass02', '유관순', '여', '010-1235-5679', 'yu77@gmail.com', 20);
+       
        
 select * from user_foriegnkey1;
 
@@ -148,7 +159,7 @@ CREATE TABLE IF NOT EXISTS USER_FORIEGNKEY2(
             ON DELETE SET NULL
 )ENGINE=INNODB;
 
-
+drop table user_foriegnkey2;
 
 insert into USER_FORIEGNKEY2 (user_no, user_id, user_pwd, user_name, gender, phone, email, grade_code)
 values (1, 'user01', 'pass01', '홍길동', '남', '010-1234-5678', 'hong123@gmail.com', 10),
@@ -192,6 +203,7 @@ SELECT * FROM TBL_COUNTRY;
 
 INSERT INTO TBL_COUNTRY VALUES (NULL, default, default);
 
+drop table user_grade2;
 
 
 
